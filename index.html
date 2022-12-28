@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Завдання</title>
+
+    <style>
+
+        /* Стилі для обнулення сторінки */
+        *{padding: 0;margin: 0;border: 0;}
+        *,*:before,*:after{-moz-box-sizing: border-box;-webkit-box-sizing: border-box;box-sizing: border-box;}
+        :focus,:active{outline: none;}
+        a:focus,a:active{outline: none;}
+        nav,footer,header,aside{display: block;}
+        html,body{height:100%;width:100%;font-size:100%;line-height:1;font-size:14px;-ms-text-size-adjust:100%;-moz-text-size-adjust:100%;-webkit-text-size-adjust:100%;}
+        input,button,textarea{font-family:inherit;}
+        input::-ms-clear{display: none;}
+        button{cursor: pointer;}
+        button::-moz-focus-inner{padding:0;border:0;}
+        a,a:visited{text-decoration: none;}
+        a:hover{text-decoration: none;}
+        ul li{list-style: none;}
+        img{vertical-align: top;}
+        h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight: inherit;}
+        /* Кінець обнулення */
+
+        body {
+            background-color: #1b1b1b;
+            color: #04ff00;
+            font-family: 'Roboto', sans-serif;
+            width: 100%;
+        }
+
+        span {
+            color: #FFFFFF;
+        }
+
+        h1 {
+            font-size: 40px;
+            text-align: center;
+            padding-top: 50px;
+            line-height: 1.3;
+            padding-bottom: 50px;
+        }
+
+        h2 {
+            font-size: 32px;
+            color: white;
+            padding-bottom: 20px;
+            text-align: center;
+            display: block;
+        }
+
+        h3 {
+            text-align: center;
+            font-size: 16px;
+            padding-bottom: 50px;
+            line-height: 1.3;
+        }
+
+        h4 {
+            color: #04ff00;
+            font-size: 16px;
+            text-align: center;
+            padding: 10px 0px;
+        }
+
+        p {
+            line-height: 1.2;
+            text-align: justify;
+        }
+
+        .task-1, .task-2, .task-3
+        {
+            width: 90%;
+            margin: 0 auto;
+            padding-bottom: 50px;
+            display: block;
+        }
+
+        .image-container {
+            display: inline-block;
+            width: 20%;
+            margin-left: 3%;
+        }
+
+        .salat{
+            width: 100%;
+            height: 300px;
+        }
+
+        .block {
+            width: 20%;
+            margin-left: 3%;
+            float: left;
+            position: relative;
+            padding-bottom: 100px;
+        }
+
+        .block img {
+            width: 100%;
+            height: 300px;
+        }
+
+        .block-description {
+            background-color: rgba(0, 0, 0, 0.2);
+            color: white;
+            padding: 10px;
+            display: none;
+            height: auto;
+            transition-duration: 1s, 5s;
+            transition-delay: 0.5s, 0s;
+            transition-timing-function: ease, ease-out;
+        }
+
+        .block:hover .block-description {
+            display: block;
+            border: 2px solid #04ff00;
+            border-top: none;
+        }
+
+        .container1{
+            display: inline-block;
+            width: 20%;
+            margin-left: 3%;
+        }
+
+        .modal {
+            z-index:1;
+            display:none;
+            padding-top:10px;
+            position:fixed;
+            left:0;
+            top:0;
+            width:100%;
+            height:100%;
+            overflow:auto;
+            background-color:rgb(0,0,0);
+            background-color:rgba(0,0,0,0.8)
+        }
+
+        .modal-content{
+            margin: auto;
+            display: block;
+                position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+
+        .modal-hover-opacity {
+            opacity:1;
+            filter:alpha(opacity=100);
+            -webkit-backface-visibility:hidden
+        }
+
+        .modal-hover-opacity:hover {
+            opacity:0.60;
+            filter:alpha(opacity=60);
+            -webkit-backface-visibility:hidden
+        }
+
+
+        .close {
+            text-decoration:none;float:right;font-size:24px;font-weight:bold;color:white
+        }
+
+        .modal-content, #caption {   
+        
+            -webkit-animation-name: zoom;
+            -webkit-animation-duration: 0.6s;
+            animation-name: zoom;
+            animation-duration: 0.6s;
+        }
+
+
+        @-webkit-keyframes zoom {
+            from {-webkit-transform:scale(0)} 
+            to {-webkit-transform:scale(1)}
+        }
+
+        @keyframes zoom {
+            from {transform:scale(0)} 
+            to {transform:scale(1)}
+        }
+
+    </style>
+    <style>
+        /* CSS code */
+        .slider {
+            width: 100%;
+            height: 500px;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+    
+        .imgs_slides {
+            width: 400%;
+            height: 500px;
+            display: flex;
+        }
+    
+        /* We have to set display: none;
+              If not, all of our images would 
+              be visible at the same time */
+        .imgs_slides input {
+            display: none;
+        }
+    
+        .slide {
+            width: 25%;
+            transition: 2s;
+        }
+    
+        .slide img {
+            height: 300px;
+        }
+    
+        /* css for slide navigation */
+        .navigation {
+            width: 100%;
+            position: absolute;
+            margin-top: -140px;
+            display: flex;
+            justify-content: center;
+        }
+    
+        .navigation-btn {
+            border: 2px solid #04ff00;
+            padding: 5px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 1s;
+        }
+    
+        .navigation-btn:not(:last-child) {
+            margin-right: 40px;
+        }
+    
+        .navigation-btn:hover {
+            background: #04ff00;
+        }
+    
+        /* The checked attribute is used with
+            reference to <input type="radio">, 
+            when radio button is clicked the 
+            class will shift w.r.t  left margin 
+            as mentioned which results in image 
+            slider */
+        #radio1:checked~.first {
+            margin-left: 0;
+        }
+    
+        #radio2:checked~.first {
+            margin-left: -25%;
+        }
+    
+        #radio3:checked~.first {
+            margin-left: -50%;
+        }
+    
+        #radio4:checked~.first {
+            margin-left: -75%;
+        }
+    </style>
+    <style>
+        #slider {
+            margin: 0 auto;
+            width: 80%;
+            max-width: 100%;
+            text-align: center;
+        }
+        #slider input[type=radio] {
+            display: none;
+        }
+        #slider label {
+            cursor:pointer;
+            text-decoration: none;
+        }
+        #slides {
+            padding: 10px;
+            position: relative;
+            z-index: 1;
+        }
+        #overflow {
+            width: 100%;
+            overflow: hidden;
+        }
+        #slide1:checked ~ #slides .inner {
+            margin-left: 0;
+        }
+        #slide2:checked ~ #slides .inner {
+            margin-left: -100%;
+        }
+        #slide3:checked ~ #slides .inner {
+            margin-left: -200%;
+        }
+        #slide4:checked ~ #slides .inner {
+            margin-left: -300%;
+        }
+        #slides .inner {
+            transition: margin-left 800ms cubic-bezier(0.770, 0.000, 0.175, 1.000);
+            width: 400%;
+            line-height: 0;
+            height: 300px;
+        }
+        #slides .slide {
+            width: 25%;
+            float:left;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            color: #fff;
+        }
+        #controls {
+            margin: -180px 0 0 0;
+            width: 100%;
+            height: 50px;
+            z-index: 3;
+            position: relative;
+        }
+        #controls label {
+            transition: opacity 0.2s ease-out;
+            display: none;
+            width: 50px;
+            height: 50px;
+            opacity: .4;
+        }
+        #controls label:hover {
+            opacity: 1;
+        }
+        #slide1:checked ~ #controls label:nth-child(2),
+        #slide2:checked ~ #controls label:nth-child(3),
+        #slide3:checked ~ #controls label:nth-child(4),
+        #slide4:checked ~ #controls label:nth-child(1) {
+            background: #04ff00;
+            float: right;
+            margin: 0 -50px 0 0;
+            display: block;
+        }
+        #slide1:checked ~ #controls label:nth-last-child(1),
+        #slide2:checked ~ #controls label:nth-last-child(4),
+        #slide3:checked ~ #controls label:nth-last-child(3),
+        #slide4:checked ~ #controls label:nth-last-child(2) {
+            background: #04ff00;
+            float: left;
+            margin: 0 0 0 -50px;
+            display: block;
+        }
+        #bullets {
+            margin: 150px 0 0;
+            text-align: center;
+            color: white;
+        }
+        #bullets label {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius:100%;
+            background: white;
+            margin: 0 10px;
+        }
+        #slide1:checked ~ #bullets label:nth-child(1),
+        #slide2:checked ~ #bullets label:nth-child(2),
+        #slide3:checked ~ #bullets label:nth-child(3),
+        #slide4:checked ~ #bullets label:nth-child(4) {
+            background: #444;
+        }
+        @media screen and (max-width: 900px) {
+        #slide1:checked ~ #controls label:nth-child(2),
+        #slide2:checked ~ #controls label:nth-child(3),
+        #slide3:checked ~ #controls label:nth-child(4),
+        #slide4:checked ~ #controls label:nth-child(1),
+        #slide1:checked ~ #controls label:nth-last-child(2),
+        #slide2:checked ~ #controls label:nth-last-child(3),
+        #slide3:checked ~ #controls label:nth-last-child(4),
+        #slide4:checked ~ #controls label:nth-last-child(1) {
+            margin: 0;
+        }
+        #slides {
+            max-width: calc(100% - 140px);
+            margin: 0 auto;
+        }
+        }
+    </style>
+</head>
+<body>
+    <h1>Задання із предмету <span>****</span><br> Виконав студент групи <span>АА-11 ***** *****</span></h1>
+    <h2>Задача 1</h2>
+    <h3>На сторінці відображається 4 фотографії страв (<span>Макет №1</span>)</h3>
+    <div class="task-1">
+        <div class="image-container">
+            <img class="salat" src="https://www.k1.ua/uploads/assets/images/%D0%B0%D0%BD%D0%B4%D0%B0%D0%BB%D1%83%D0%B7%D1%81%D0%BA%D0%B8%D0%B9.jpg" alt="Image 1">
+        </div>
+        <div class="image-container">
+            <img class="salat" src="https://www.k1.ua/uploads/assets/images/%D0%92%D0%B0%D0%BB%D1%8C%D1%84%D0%B4%D0%BE%D1%80%D1%81%D0%BA%D0%B8%D0%B9.jpg" alt="Image 2">
+        </div>
+        <div class="image-container">
+            <img class="salat" src="https://www.k1.ua/uploads/assets/images/%D0%BF%D0%B0%D0%BD%D1%86%D0%B0%D0%BD%D0%B5%D0%BB%D0%BB%D0%B0.jpg" alt="Image 3">
+        </div>
+        <div class="image-container">
+            <img class="salat" src="https://www.k1.ua/uploads/assets/images/%D0%BA%D0%B0%D0%BF%D1%80%D0%B5%D0%B7%D0%B5.jpg" alt="Image 4">
+        </div>
+    </div>
+    <h2>Задача 2</h2>
+    <h3>При наведенні на фотографію з’являться карточка з описом рецепту (<span>Макет №2</span>)</h3>
+    <div class="task-2" style="height: 620px; padding-bottom: 0px;">
+        <div class="block-container">
+            <div class="block">
+                <img class="salat" src="https://www.k1.ua/uploads/assets/images/%D0%B0%D0%BD%D0%B4%D0%B0%D0%BB%D1%83%D0%B7%D1%81%D0%BA%D0%B8%D0%B9.jpg" alt="Опис фотографії 1">
+                <div class="block-description">
+                    <h4> Андалузький салат </h4>
+                    <p>  Редьку очистити, натерти на крупній тертці. Залити оцтом, почекати, поки вона пустить сік, який потім потрібно злити. 
+                    Огірки і цибулю нарізати півкільцями, помідори - великими шматками. Додати редьку, і крупно нарізану зелень.
+                    Посолити, поперчити, заправити оливковою олією і перемішати. </p>
+                </div>
+            </div>
+            <div class="block">
+                <img class="salat" src="https://www.k1.ua/uploads/assets/images/%D0%92%D0%B0%D0%BB%D1%8C%D1%84%D0%B4%D0%BE%D1%80%D1%81%D0%BA%D0%B8%D0%B9.jpg" alt="Опис фотографії 2">
+                <div class="block-description">
+                    <h4> Вальдорфський салат </h4>
+                    <p> Яблука нарізати невеликими шматочками, селеру - соломкою, сир - кубиками. Волоські горіхи - подрібнити ножем, листя
+                    салату - порвати руками.
+                     Змішати всі інгредієнти, посолити, поперчити, заправити оливковою олією і скропити лимонним соком. </p>
+                </div>
+            </div>
+            <div class="block">
+                <img class="salat" src="https://www.k1.ua/uploads/assets/images/%D0%BF%D0%B0%D0%BD%D1%86%D0%B0%D0%BD%D0%B5%D0%BB%D0%BB%D0%B0.jpg" alt="Опис фотографії 3">
+                <div class="block-description">
+                    <h4> Панцанелла </h4>
+                    <p>Хліб нарізати кубиками товщиною в 1 см, викласти на деко, скропити оливковою олією, підсушити в духовці.
+                     Помідори нарізати великими дольками, огірки - четвертинками кружків, цибулю - півкільцями, базилік - дрібно нарізати,
+                    часник пропустити через прес.
+                     Змішати всі інгредієнти, посолити, поперчити, струсити, щоб вони перемішалися, і заправити оливковою олією.</p>
+                </div>
+            </div>
+            <div class="block">
+                <img class="salat" src="https://www.k1.ua/uploads/assets/images/%D0%BA%D0%B0%D0%BF%D1%80%D0%B5%D0%B7%D0%B5.jpg" alt="Опис фотографії 4">
+                <div class="block-description">
+                    <h4> Салат Капрезе </h4>
+                    <p> Помідори та моцарелу нарізати кільцями товщиною приблизно 1 см.
+                        Викласти на тарілку, чергуючи помідори і сир, посолити, поперчити, скропити оливковою олією.
+                        Базилік порвати руками і прикрасити ним салат. </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <h2>Задача 3</h2>
+    <h3> При кліку на фотографію з’являється модальне вікно з великою фотографією страви (<span>Макет №3</span>)</h3>
+    <div class="task-3" style="height: 400px;">
+        <div class="container1">
+            <img class="salat" src="https://www.k1.ua/uploads/assets/images/%D0%B0%D0%BD%D0%B4%D0%B0%D0%BB%D1%83%D0%B7%D1%81%D0%BA%D0%B8%D0%B9.jpg"
+                style="max-width:100%;cursor:pointer" onclick="onClick(this)" class="modal-hover-opacity">
+        </div>
+        <div class="container1">
+            <img class="salat" src="https://www.k1.ua/uploads/assets/images/%D0%92%D0%B0%D0%BB%D1%8C%D1%84%D0%B4%D0%BE%D1%80%D1%81%D0%BA%D0%B8%D0%B9.jpg"
+                style="max-width:100%;cursor:pointer" onclick="onClick(this)" class="modal-hover-opacity">
+        </div>
+        <div class="container1">
+            <img class="salat" src="https://www.k1.ua/uploads/assets/images/%D0%BF%D0%B0%D0%BD%D1%86%D0%B0%D0%BD%D0%B5%D0%BB%D0%BB%D0%B0.jpg"
+                style="max-width:100%;cursor:pointer" onclick="onClick(this)" class="modal-hover-opacity">
+        </div>
+        <div class="container1">
+            <img  class="salat"src="https://www.k1.ua/uploads/assets/images/%D0%BA%D0%B0%D0%BF%D1%80%D0%B5%D0%B7%D0%B5.jpg"
+                style="max-width:100%;cursor:pointer" onclick="onClick(this)" class="modal-hover-opacity">
+        </div>
+        
+        
+        <div id="modal01" class="modal" onclick="this.style.display='none'">
+            <span class="close">&times;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+            <div class="modal-content">
+                <img id="img01" style="max-width:100%">
+            </div>
+        </div>
+    </div>
+
+    <h2>Задача 4</h2>
+    <h3> Під фотографіями страв – розміщуються радіокнопки, за замовченням обрана перша. <br> При натисканні на другу радіокнопку,
+    фотографії прокручуються зліва-направо і з’являється другий блок із 4-х фотографій (<span>Макет №4</span>)</h3>
+
+    <div class="task-4">
+        <center>
+        
+            <!-- Image slider start -->
+            <div class="slider">
+                <div class="imgs_slides">
+        
+                    <!-- Radio buttons start -->
+                    <input type="radio" name="radio-btn" id="radio1" />
+        
+                    <input type="radio" name="radio-btn" id="radio2" />
+        
+                    <input type="radio" name="radio-btn" id="radio3" />
+        
+                    <input type="radio" name="radio-btn" id="radio4" />
+        
+                    <!-- Radio buttons end -->
+                    <!-- Embedding  images start -->
+                    <div class="first slide">
+                        <div class="image-container">
+                            <img class="salat"
+                                src="https://www.k1.ua/uploads/assets/images/%D0%B0%D0%BD%D0%B4%D0%B0%D0%BB%D1%83%D0%B7%D1%81%D0%BA%D0%B8%D0%B9.jpg"
+                                alt="Image 1">
+                        </div>
+                        <div class="image-container">
+                            <img class="salat"
+                                src="https://www.k1.ua/uploads/assets/images/%D0%92%D0%B0%D0%BB%D1%8C%D1%84%D0%B4%D0%BE%D1%80%D1%81%D0%BA%D0%B8%D0%B9.jpg"
+                                alt="Image 2">
+                        </div>
+                        <div class="image-container">
+                            <img class="salat"
+                                src="https://www.k1.ua/uploads/assets/images/%D0%BF%D0%B0%D0%BD%D1%86%D0%B0%D0%BD%D0%B5%D0%BB%D0%BB%D0%B0.jpg"
+                                alt="Image 3">
+                        </div>
+                        <div class="image-container">
+                            <img class="salat" src="https://www.k1.ua/uploads/assets/images/%D0%BA%D0%B0%D0%BF%D1%80%D0%B5%D0%B7%D0%B5.jpg"
+                                alt="Image 4">
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <div class="image-container">
+                            <img class="salat"
+                                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfG2IgusLIOJdNGjf3ysfHJboGVN6fz45QATuqMkLpxZR39WUoR2nBfUYAhtgMhPoEJC4&usqp=CAU"
+                                alt="Image 1">
+                        </div>
+                        <div class="image-container">
+                            <img class="salat"
+                                src="https://media.istockphoto.com/id/188099381/de/foto/salat-mit-frischem-gem%C3%BCse.jpg?s=612x612&w=0&k=20&c=gsRWlLmf3mFQhFHm7lEpKNeJvHaVMKcOw1JW_BtCdOk="
+                                alt="Image 2">
+                        </div>
+                        <div class="image-container">
+                            <img class="salat"
+                                src="https://media.istockphoto.com/id/104796223/de/foto/salat.jpg?s=612x612&w=0&k=20&c=ssHE_iQVtxvR0pdgG18EnfDVWCbTVjweayqwLjcyU5M="
+                                alt="Image 3">
+                        </div>
+                        <div class="image-container">
+                            <img class="salat" src="https://media.istockphoto.com/id/188099381/de/foto/salat-mit-frischem-gem%C3%BCse.jpg?s=612x612&w=0&k=20&c=gsRWlLmf3mFQhFHm7lEpKNeJvHaVMKcOw1JW_BtCdOk="
+                                alt="Image 4">
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <div class="image-container">
+                            <img class="salat"
+                                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTLfidMbt4LwXebKleC2XVy7vaBSeMFC3OKBkFU_Klox86PiPNEiRy6xDWcVP3InTeGu8&usqp=CAU"
+                                alt="Image 1">
+                        </div>
+                        <div class="image-container">
+                            <img class="salat"
+                                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQeCyhxDfOejtz8ON-gnb21jOP6B8OmsBaBnVvcb0zoZ9pyqVC-z3Mlq_OG3-8cuXSMZ2k&usqp=CAU"
+                                alt="Image 2">
+                        </div>
+                        <div class="image-container">
+                            <img class="salat"
+                                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQFMOTcbaYOL75C61NMyzbeJ49ZL3OUPrJI_AwFvp9yKglYUpNfXS1GdlpageXV8raMPsY&usqp=CAU"
+                                alt="Image 3">
+                        </div>
+                        <div class="image-container">
+                            <img class="salat" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSs3f_vVYBvyI988kL7TY4LLrKMXnO3oxZapdlgonRo_GwC_nl0gHpuDtEcfOyHzQAXT-Y&usqp=CAU"
+                                alt="Image 4">
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <div class="image-container">
+                            <img class="salat"
+                                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-XDu1LnXLOsg8YCn7VhrQExs4eH4jzQV9V-bDldsoFfOKXCJawCPswHjYWquTRL74p64&usqp=CAU"
+                                alt="Image 1">
+                        </div>
+                        <div class="image-container">
+                            <img class="salat"
+                                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKA7eM1VJkQAlXN6n8ysC4Zs6zj5R68TfdIiVPCW4wc7cJ8e9kuTw8KBkJOrvdwPEnUio&usqp=CAU"
+                                alt="Image 2">
+                        </div>
+                        <div class="image-container">
+                            <img class="salat"
+                                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1EcKTOS984MfyYChhI0DAVa1r4rNk48hkIqkWXEMVlv-hqBwGUGO8DTPmH9Ayd2RlfAs&usqp=CAU"
+                                alt="Image 3">
+                        </div>
+                        <div class="image-container">
+                            <img class="salat" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRe9EWDZ0Kwi8881fgf26pCfZnuWbboHwIQJ5gK740Of8SdfnYwQraYUeht5lqq7mCpSQA&usqp=CAU"
+                                alt="Image 4">
+                        </div>
+                    </div>
+                    <!-- Embedding images end -->
+                </div>
+        
+                <!-- Navigation start -->
+                <div class="navigation">
+                    <label for="radio1" class="navigation-btn">
+                    </label>
+                    <label for="radio2" class="navigation-btn">
+                    </label>
+                    <label for="radio3" class="navigation-btn">
+                    </label>
+                    <label for="radio4" class="navigation-btn">
+                    </label>
+                </div>
+                <!-- Navigation end -->
+            </div>
+            <!-- Image slider end -->
+        </center>
+    </div>
+
+    <h2>Задача 5</h2>
+    <h3> Слайдер з радіокнопками виглядає старомодно, краще зробити перемикання стрілками (<span>Макет №5</span>)</h3>
+    <div class="task-5" style="padding-bottom: 200px; height: 500px;">
+        <div id="slider">
+   <input type="radio" name="slider" id="slide1" checked>
+   <input type="radio" name="slider" id="slide2">
+   <input type="radio" name="slider" id="slide3">
+   <input type="radio" name="slider" id="slide4">
+   <div id="slides">
+      <div id="overflow">
+         <div class="inner">
+            <div class="slide slide_1">
+               <div class="slide-content">
+                <div class="image-container">
+                    <img class="salat"
+                        src="https://www.k1.ua/uploads/assets/images/%D0%B0%D0%BD%D0%B4%D0%B0%D0%BB%D1%83%D0%B7%D1%81%D0%BA%D0%B8%D0%B9.jpg"
+                        alt="Image 1">
+                </div>
+                <div class="image-container">
+                    <img class="salat"
+                        src="https://www.k1.ua/uploads/assets/images/%D0%92%D0%B0%D0%BB%D1%8C%D1%84%D0%B4%D0%BE%D1%80%D1%81%D0%BA%D0%B8%D0%B9.jpg"
+                        alt="Image 2">
+                </div>
+                <div class="image-container">
+                    <img class="salat"
+                        src="https://www.k1.ua/uploads/assets/images/%D0%BF%D0%B0%D0%BD%D1%86%D0%B0%D0%BD%D0%B5%D0%BB%D0%BB%D0%B0.jpg"
+                        alt="Image 3">
+                </div>
+                <div class="image-container">
+                    <img class="salat" src="https://www.k1.ua/uploads/assets/images/%D0%BA%D0%B0%D0%BF%D1%80%D0%B5%D0%B7%D0%B5.jpg"
+                        alt="Image 4">
+                </div>
+               </div>
+            </div>
+            <div class="slide slide_2">
+               <div class="slide-content">
+                <div class="image-container">
+                    <img class="salat"
+                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfG2IgusLIOJdNGjf3ysfHJboGVN6fz45QATuqMkLpxZR39WUoR2nBfUYAhtgMhPoEJC4&usqp=CAU"
+                        alt="Image 1">
+                </div>
+                <div class="image-container">
+                    <img class="salat"
+                        src="https://media.istockphoto.com/id/188099381/de/foto/salat-mit-frischem-gem%C3%BCse.jpg?s=612x612&w=0&k=20&c=gsRWlLmf3mFQhFHm7lEpKNeJvHaVMKcOw1JW_BtCdOk="
+                        alt="Image 2">
+                </div>
+                <div class="image-container">
+                    <img class="salat"
+                        src="https://media.istockphoto.com/id/104796223/de/foto/salat.jpg?s=612x612&w=0&k=20&c=ssHE_iQVtxvR0pdgG18EnfDVWCbTVjweayqwLjcyU5M="
+                        alt="Image 3">
+                </div>
+                <div class="image-container">
+                    <img class="salat"
+                        src="https://media.istockphoto.com/id/188099381/de/foto/salat-mit-frischem-gem%C3%BCse.jpg?s=612x612&w=0&k=20&c=gsRWlLmf3mFQhFHm7lEpKNeJvHaVMKcOw1JW_BtCdOk="
+                        alt="Image 4">
+                </div>
+               </div>
+            </div>
+            <div class="slide slide_3">
+               <div class="slide-content">
+                <div class="image-container">
+                    <img class="salat"
+                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTLfidMbt4LwXebKleC2XVy7vaBSeMFC3OKBkFU_Klox86PiPNEiRy6xDWcVP3InTeGu8&usqp=CAU"
+                        alt="Image 1">
+                </div>
+                <div class="image-container">
+                    <img class="salat"
+                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQeCyhxDfOejtz8ON-gnb21jOP6B8OmsBaBnVvcb0zoZ9pyqVC-z3Mlq_OG3-8cuXSMZ2k&usqp=CAU"
+                        alt="Image 2">
+                </div>
+                <div class="image-container">
+                    <img class="salat"
+                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQFMOTcbaYOL75C61NMyzbeJ49ZL3OUPrJI_AwFvp9yKglYUpNfXS1GdlpageXV8raMPsY&usqp=CAU"
+                        alt="Image 3">
+                </div>
+                <div class="image-container">
+                    <img class="salat"
+                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSs3f_vVYBvyI988kL7TY4LLrKMXnO3oxZapdlgonRo_GwC_nl0gHpuDtEcfOyHzQAXT-Y&usqp=CAU"
+                        alt="Image 4">
+                </div>
+               </div>
+            </div>
+            <div class="slide slide_4">
+               <div class="slide-content">
+                <div class="image-container">
+                    <img class="salat"
+                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-XDu1LnXLOsg8YCn7VhrQExs4eH4jzQV9V-bDldsoFfOKXCJawCPswHjYWquTRL74p64&usqp=CAU"
+                        alt="Image 1">
+                </div>
+                <div class="image-container">
+                    <img class="salat"
+                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKA7eM1VJkQAlXN6n8ysC4Zs6zj5R68TfdIiVPCW4wc7cJ8e9kuTw8KBkJOrvdwPEnUio&usqp=CAU"
+                        alt="Image 2">
+                </div>
+                <div class="image-container">
+                    <img class="salat"
+                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1EcKTOS984MfyYChhI0DAVa1r4rNk48hkIqkWXEMVlv-hqBwGUGO8DTPmH9Ayd2RlfAs&usqp=CAU"
+                        alt="Image 3">
+                </div>
+                <div class="image-container">
+                    <img class="salat"
+                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRe9EWDZ0Kwi8881fgf26pCfZnuWbboHwIQJ5gK740Of8SdfnYwQraYUeht5lqq7mCpSQA&usqp=CAU"
+                        alt="Image 4">
+                </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+   <div id="controls">
+      <label for="slide1"></label>
+      <label for="slide2"></label>
+      <label for="slide3"></label>
+      <label for="slide4"></label>
+   </div>
+</div>
+    </div>
+    <script>
+        function onClick(element) {
+            document.getElementById("img01").src = element.src;
+            document.getElementById("modal01").style.display = "block";
+        }
+    </script>
+</body>
+</html>
